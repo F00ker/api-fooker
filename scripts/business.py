@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import datetime
+import string
 today = datetime.date.today()
 
 def easterday():

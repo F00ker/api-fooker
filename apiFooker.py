@@ -20,13 +20,17 @@ from business import *
 
 listenip = "0.0.0.0"
 listenport = "9090"
+web.config.debug = False
 
 urls = (
   '/business/*', 'businessday',
-  '/myip/*', 'myip',
+  '/myip/(.*)', 'myip',
   '/', 'index'
 )
 
+###########
+# Call the functions
+##########
 class index:
     def GET(self):
         raise web.seeother('/static/index.html')

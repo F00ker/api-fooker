@@ -12,7 +12,6 @@ import sys
 
 sys.path.insert(0, 'scripts')
 
-from holiday import *
 from business import *
 
 ############
@@ -24,7 +23,6 @@ listenport = "9090"
 
 urls = (
   '/business/*', 'businessday',
-  '/holiday/*', 'holiday',
   '/myip/*', 'myip',
   '/', 'index'
 )

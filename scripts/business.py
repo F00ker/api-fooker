@@ -1,4 +1,11 @@
 #!/usr/bin/python
+#################
+#
+# api-fooker business day API, tells you if today is a working day or not
+# Discounts weekends and national holidays
+#
+#################
+
 
 import datetime
 import string

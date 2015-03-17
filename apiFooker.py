@@ -9,6 +9,7 @@
 
 import web
 import sys
+import datetime
 
 sys.path.insert(0, 'scripts')
 
@@ -26,6 +27,7 @@ web.config.debug = False
 urls = (
   '/business/*', 'businessday',
   '/myip/*', 'myip',
+  '/epoc/(.*)', 'epoc',
   '/', 'index'
 )
 
@@ -43,6 +45,10 @@ class businessday:
 class myip:
     def GET(self):
 	return web.ctx.env.get('HTTP_X_FORWARDED_FOR', web.ctx.get('ip', ''))
+
+class epoc:
+    def GET(self,uri):
+	return datetime.datetime.fromtimestamp(int(uri)).strftime('%Y-%m-%d %H:%M:%S')
 
 app = web.application(urls,globals())
 

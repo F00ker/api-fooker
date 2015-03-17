@@ -12,6 +12,7 @@ import sys
 
 sys.path.insert(0, 'scripts')
 
+from Daemon import Daemon
 from business import *
 
 ############
@@ -24,7 +25,7 @@ web.config.debug = False
 
 urls = (
   '/business/*', 'businessday',
-  '/myip/(.*)', 'myip',
+  '/myip/*', 'myip',
   '/', 'index'
 )
 
@@ -49,6 +50,27 @@ app = web.application(urls,globals())
 # Start up!
 ###########
 
+class MyDaemon(Daemon):
+	def run(self):
+		app.run()
+
 if __name__ == "__main__":
-    sys.argv[1] = listenip+':'+listenport
-    app.run()
+	service = MyDaemon('/tmp/apifooker.pid')
+	if len(sys.argv) == 2:
+		if 'start' == sys.argv[1]:
+			sys.argv[1] = listenip+':'+listenport
+			service.start()
+		elif 'stop' == sys.argv[1]:
+			service.stop()
+		elif 'restart' == sys.argv[1]:
+			service.restart()
+		elif 'console' == sys.argv[1]:
+			sys.argv[1] = listenip+':'+listenport
+			service.console()
+		else:
+			print "Unknown command"
+			sys.exit(2)
+		sys.exit(0)
+	else:
+		print "usage: %s start|stop|restart|console" % sys.argv[0]
+		sys.exit(2)

@@ -15,6 +15,7 @@ sys.path.insert(0, 'scripts')
 
 from Daemon import Daemon
 from business import *
+from store import *
 
 ############
 # Setup
@@ -28,6 +29,7 @@ urls = (
   '/business/*', 'businessday',
   '/myip/*', 'myip',
   '/epoc/(.*)', 'epoc',
+  '/store/(.*)', 'store',
   '/', 'index'
 )
 
@@ -49,6 +51,10 @@ class myip:
 class epoc:
     def GET(self,uri):
 	return datetime.datetime.fromtimestamp(int(uri)).strftime('%Y-%m-%d %H:%M:%S')
+
+class store:
+    def GET(self,uri):
+	return storeThis(uri)
 
 app = web.application(urls,globals())
 

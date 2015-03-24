@@ -30,6 +30,7 @@ urls = (
   '/myip/*', 'myip',
   '/epoc/(.*)', 'epoc',
   '/store/(.*)', 'store',
+  '/showall/*', 'showAll',
   '/', 'index'
 )
 
@@ -55,6 +56,10 @@ class epoc:
 class store:
     def GET(self,uri):
 	return storeThis(uri)
+
+class showAll:
+    def GET(self):
+	return showStored()
 
 app = web.application(urls,globals())
 

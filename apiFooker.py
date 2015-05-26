@@ -16,6 +16,7 @@ sys.path.insert(0, 'scripts')
 from Daemon import Daemon
 from business import *
 from store import *
+from aws_ec2 import *
 
 ############
 # Setup
@@ -31,6 +32,7 @@ urls = (
   '/epoc/(.*)', 'epoc',
   '/store/(.*)', 'store',
   '/showall/*', 'showAll',
+  '/ec2/(.*)', 'ec2',
   '/', 'index'
 )
 
@@ -60,6 +62,11 @@ class store:
 class showAll:
     def GET(self):
 	return showStored()
+
+class ec2:
+    def GET(self,uri):
+	print uri
+	return ec2details(uri)
 
 app = web.application(urls,globals())
 

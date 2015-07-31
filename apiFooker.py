@@ -17,6 +17,7 @@ from Daemon import Daemon
 from business import *
 from store import *
 from aws_ec2 import *
+from aws_rds import *
 
 ############
 # Setup
@@ -33,6 +34,7 @@ urls = (
   '/store/(.*)', 'store',
   '/showall/*', 'showAll',
   '/ec2/(.*)', 'ec2',
+  '/rds/(.*)', 'rds',
   '/', 'index'
 )
 
@@ -41,7 +43,7 @@ urls = (
 ##########
 class index:
     def GET(self):
-        raise web.seeother('/static/index.html')
+        raise web.seeother('http://www.google.com/ncr')
 
 class businessday:
     def GET(self):
@@ -67,6 +69,11 @@ class ec2:
     def GET(self,uri):
 	print uri
 	return ec2details(uri)
+
+class rds:
+    def GET(self,uri):
+	print uri
+	return rdsdetails(uri)
 
 app = web.application(urls,globals())
 

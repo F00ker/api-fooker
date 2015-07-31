@@ -16,8 +16,6 @@ def rdsdetails(rds_type):
     soup = BeautifulSoup(pageContent)
     soup = soup.find_all("table")[-1]
 
-    print "table read"
-
     rows = soup.find_all('tr')
     for row in rows:
 	cols = row.find_all('td')

@@ -2,7 +2,7 @@
 
 ###########################
 #
-# Extraire les CPU et RAM des instances RDS contenu dans la page http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html
+# Extraire les CPU et RAM des instances RDS contenu dans la page http://aws.amazon.com/rds/details/
 #
 ###########################
 
@@ -12,9 +12,11 @@ from lxml import etree
 
 
 def rdsdetails(rds_type):
-    pageContent = urllib2.urlopen('http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html').read()
+    pageContent = urllib2.urlopen('http://aws.amazon.com/rds/details/').read()
     soup = BeautifulSoup(pageContent)
     soup = soup.find_all("table")[-1]
+
+    print "table read"
 
     rows = soup.find_all('tr')
     for row in rows:

@@ -8,4 +8,4 @@
 
 
 def displiocontent():
-    print "Probably should but some code here...."
+    return "Probably should but some code here...."

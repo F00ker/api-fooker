@@ -18,6 +18,7 @@ from business import *
 from store import *
 from aws_ec2 import *
 from aws_rds import *
+from displio import *
 
 ############
 # Setup
@@ -35,6 +36,7 @@ urls = (
   '/showall/*', 'showAll',
   '/ec2/(.*)', 'ec2',
   '/rds/(.*)', 'rds',
+  '/displio/*', 'displio',
   '/', 'index'
 )
 
@@ -74,6 +76,10 @@ class rds:
     def GET(self,uri):
 	print uri
 	return rdsdetails(uri)
+
+class displio:
+    def GET(self):
+	return displiocontent()
 
 app = web.application(urls,globals())
 

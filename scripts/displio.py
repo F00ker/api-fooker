@@ -22,15 +22,15 @@ def displiocontent():
     raw_average = os.getloadavg()
     load_average = raw_average[0]
 
-    return "--- FOOKER ---\nTime:\n{}\n\nUptime:\n{}\n\nLoad:{}\n\nFree Space: {}GB".format(time,formated_uptime,load_average,disk_usage())
+    return "--- FOOKER ---\nTime:\n{}\n\nUptime:\n{}\nLoad:{}\nFree Space /home: {}GB\nFree Space /: {}GB".format(time,formated_uptime,load_average,disk_usage("/home"),disk_usage("/"))
 
 
-def disk_usage():
+def disk_usage(path):
     """Return disk usage statistics about the given path.
 
     Returned valus is a named tuple with attributes 'total', 'used' and
     'free', which are the amount of total, used and free space, in bytes.
     """
-    st = os.statvfs("/home")
+    st = os.statvfs(path)
     free = st.f_bavail * st.f_frsize
     return free / 1024 / 1024 / 1024
